@@ -1,0 +1,5 @@
+__pycache__/
+.vscode/
+ven/
+dev.db
+migrations/
