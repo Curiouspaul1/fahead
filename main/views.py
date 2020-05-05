@@ -29,7 +29,7 @@ def send_newsletter():
         for user in users:
             msg = Message(subject=subject,sender=("Oladayo",current_app.config['MAIL_DEFAULT_SENDER']),recipients=recipients)
             #msg.body = render_template('newsletter.txt',news_body=news_body,subject=subject)
-            msg.html = render_template('newsletter.html',news_body=news_body,subject=subject)
+            msg.html = render_template('newsletter.html',name=user.name,news_body=news_body,subject=subject)
 
             try:
                 conn.send(msg)
