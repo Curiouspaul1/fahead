@@ -1,4 +1,7 @@
+from flask_mail import Message
+from flask import current_app
 from Fahead.models import user_schema,users_schema,User,db
+from Fahead import mail
 from . import api
 from flask import request,jsonify,make_response,render_template
 
@@ -21,15 +24,15 @@ def users():
 @api.route('/send_newsletter',methods=['GET','POST'])
 def send_newsletter():
     users = User.query.all()
-    recipients = [user.email for user in users]
+    subscribers = [user.email for user in users]
     payload = request.get_json()
-    subject = payload['subject']
+    mail_subject = payload['subject']
     news_body = payload['body']
     with mail.connect() as conn:
         for user in users:
-            msg = Message(subject=subject,sender=("Oladayo",current_app.config['MAIL_DEFAULT_SENDER']),recipients=recipients)
+            msg = Message(subject=mail_subject.replace("[[firstname]]", "{}".format(user.name.split(' ')[0])),sender=("Oladayo",current_app.config['MAIL_DEFAULT_SENDER']),recipients=subscribers)
             #msg.body = render_template('newsletter.txt',news_body=news_body,subject=subject)
-            msg.html = render_template('newsletter.html',name=user.name,news_body=news_body,subject=subject)
+            msg.html = render_template('newsletter.html',name=user.name,news_body=news_body,subject=mail_subject.replace("[[firstname]]","{}".format(user.name.split(' ')[0])))
 
             try:
                 conn.send(msg)
