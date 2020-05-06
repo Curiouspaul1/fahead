@@ -1,4 +1,4 @@
-from . import db,ma
+from Fahead import db,ma
 
 class User(db.Model):
     id = db.Column(db.Integer,primary_key=True,nullable=False)
