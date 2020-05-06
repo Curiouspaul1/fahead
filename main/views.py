@@ -1,8 +1,8 @@
 from flask_mail import Message
 from flask import request,jsonify,make_response,render_template,current_app
 import smtplib
-from Fahead.models import user_schema,users_schema,User,db
-from Fahead import mail
+from ..models import user_schema,users_schema,User,db
+from .. import mail
 from . import api
 
 @api.route('/register',methods=['POST'])
