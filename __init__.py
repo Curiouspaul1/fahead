@@ -14,5 +14,5 @@ ma = Marshmallow(app)
 mail = Mail(app)
 
 # register blueprints
-from Fahead.main import api
+from .main import api
 app.register_blueprint(api,url_prefix='/api')
