@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from .config import config
+from config import config
 from flask_mail import Mail, Message
 import os
 

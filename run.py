@@ -1,5 +1,5 @@
 from flask_migrate import Migrate
-from models import User
+from Fahead.models import User
 from Fahead import db,app,mail
 
 migrate = Migrate(app,db)
