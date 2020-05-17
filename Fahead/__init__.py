@@ -5,6 +5,7 @@ from config import config
 from flask_mail import Mail, Message
 from flask_cors import CORS
 import os
+import logging
 
 
 app = Flask(__name__)
