@@ -11,9 +11,9 @@ import smtplib
 def register():
     payload = request.get_json(force=True)
     if not isNameValid(payload['name']):
-        return make_response(jsonify({"code":"error","fields":{"name":"invalid name sequence","email":"invalid email sequence"}}),400)
+        return make_response(jsonify({"code":"error","fields":{"name":"invalid name sequence"}}),400)
     elif not emailcheck(payload['email']):
-        return make_response(jsonify({"code":"error","fields":{"name":"invalid name sequence","email":"invalid email sequence"}}),400)
+        return make_response(jsonify({"code":"error","fields":{"email":"invalid email sequence"}}),400)
     try:
         user = User(name=payload['name'],email=payload['email'])
         db.session.add(user)
