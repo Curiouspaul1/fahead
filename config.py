@@ -15,7 +15,7 @@ class Config:
     MAIL_MAX_EMAILS = 1
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir,'dev.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir,'dev.sqlite')
     DEBUG=True
 
 class ProductionConfig(Config):

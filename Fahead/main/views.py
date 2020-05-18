@@ -1,19 +1,28 @@
 from flask_mail import Message
 from flask import request,jsonify,make_response,render_template,current_app
-import smtplib
+from sqlalchemy.exc import IntegrityError
 from Fahead.models import user_schema,users_schema,User,db
+from Fahead.main.extensions import isNameValid,emailcheck
 from Fahead import mail
 from . import api
+import smtplib
 
 @api.route('/register',methods=['POST'])
 def register():
     payload = request.get_json(force=True)
-    user = User(name=payload['name'],email=payload['email'])
+    if not isNameValid(payload['name']):
+        return make_response(jsonify({"code":"error","fields":{"name":"invalid name sequence","email":"invalid email sequence"}}),400)
+    elif not emailcheck(payload['email']):
+        return make_response(jsonify({"code":"error","fields":{"name":"invalid name sequence","email":"invalid email sequence"}}),400)
+    try:
+        user = User(name=payload['name'],email=payload['email'])
+        db.session.add(user)
+        db.session.commit() # if error unique constraint fails upon commiting - the Integrity error is raised
+    except IntegrityError as e:
+        return make_response(jsonify({"code":"error","msg":"User with email already exists"}),400)
+        raise e
 
-    db.session.add(user)
-    db.session.commit()
-
-    return make_response(jsonify({'msg':'registered user successfully'}),200)
+    return make_response(jsonify({'code':'ok'}),200)
 
 @api.route('/users',methods=['GET'])
 def users():
