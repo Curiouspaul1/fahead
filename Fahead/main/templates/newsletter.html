@@ -4,15 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{subject}}</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='styles/main.css')}}">
+    <!--{{url_for('static',filename='styles/main.css')}}-->
 </head>
 <body>
-    <header>
-        {{subject}}
-    </header>
-    -------------
-    <h2>Dear {{name}}</h2>
-    <p>
-        {{news_body}}
-    </p>
+    <div class="container">
+        <header>
+            <!--<img src="../static/img/img1.jpg" id="header-img" alt="">-->
+        </header>
+        -------------
+        <h2>Dear {{name}}</h2>
+        <p>
+            Welcome to the clique.
+            <br>
+            I'm Oladayo, CEO and Co-founder, ForgeAhead, and I'm so hyped up to inform you that you've just put your foot on the rigth path to self-fulfillment. All of us at ForgeAhead are "sworn" to make sure you've got the right tools to succeed.
+            <br>
+            Here's the link to download yur free copy of the 7-fgure salary blueprint.
+        </p>
+        <button id="download-btn">Download here</button> 
+        <p>
+            You've just made one of the (if not the) best decision of your life by joining ths list. You'll be getting premium access to unlimited, hard-to-get information that will transform your career.
+            <br>
+            This is just the beginning. If you have friends that you love, and want them to succeed, send them a link to the sign-up page. <br><br>
+    
+            <a href="https://7-figuresalaryebook.gr8.com">https://7-figuresalaryebook.gr8.com</a>
+            <br>
+            <strong>Cheers,<br>
+            Oladayo
+            </strong>
+        </p>
+    
+        <footer>
+            <p>ForgeAhead,Akoka, Lagos 100001, Nigeria <br> You may <a href="#">unsubscribe</a> or <a href="">change your contact details</a> at any time</p>
+        </footer>
+    </div>
 </body>
 </html>

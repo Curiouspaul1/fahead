@@ -36,13 +36,13 @@ def send_newsletter():
     subscribers = [user.email for user in users]
     payload = request.get_json()
     mail_subject = payload['subject']
-    news_body = payload['body']
+    #news_body = payload['body']
     #msg.body = render_template('newsletter.txt',news_body=news_body,subject=subject)
     with mail.connect() as conn:
         for user in users:
             msg = Message(sender=("Oladayo",current_app.config['MAIL_DEFAULT_SENDER']),recipients=[user.email])
             msg.subject = mail_subject.replace("[[firstname]]", "{}".format(user.name.split(' ')[0]))
-            msg.html = render_template('newsletter.html',name=user.name,news_body=news_body,subject=mail_subject.replace("[[firstname]]","{}".format(user.name.split(' ')[0])))
+            msg.html = render_template('newsletter.html',name=user.name,subject=mail_subject.replace("[[firstname]]","{}".format(user.name.split(' ')[0])))
             try:
                 conn.send(msg)
                 #with app.open_resource("image.png") as fp:

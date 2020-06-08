@@ -33,7 +33,8 @@ def emailcheck(str):
         # domain name
         [a-zA-Z0-9.-]+
         # dot_something
-        (\.[a-zA-Z]{2,4})
+		[\.]
+        ([a-zA-Z]{2,4})
     ''',re.VERBOSE)
     try:
         if emailreg.search(str):
